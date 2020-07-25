@@ -1,0 +1,36 @@
+.profile__info {
+  display: -ms-grid;
+  display: grid;
+      grid-template-areas: 
+  "avatar name edit"
+  "avatar info info";
+  -ms-grid-rows: max-content max-content;
+  grid-template-rows: -webkit-max-content -webkit-max-content;
+  grid-template-rows: max-content max-content;
+  -ms-grid-columns: -webkit-max-content minmax(-webkit-max-content, 285px) 1fr;
+  -ms-grid-columns: max-content minmax(max-content, 285px) 1fr;
+  grid-template-columns: -webkit-max-content minmax(-webkit-min-content, 285px) 1fr;
+  grid-template-columns: max-content minmax(max-content, 285px) 1fr;
+  max-width: 336px;
+}
+
+@media (max-width: 740px) {
+  .profile__info {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+      align-items: flex-start;
+    -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    max-width: 280px;
+    min-height: 66px;
+    margin: auto;
+    margin-bottom: 36px;
+  }
+}

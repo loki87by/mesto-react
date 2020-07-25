@@ -1,0 +1,9 @@
+.popup__text_type_activity {
+  margin-top: 29px;
+}
+
+@media (max-width: 557px) {
+  .popup__text_type_activity {
+    margin-top: calc((29.74 / 430) * 100%);
+  }
+}

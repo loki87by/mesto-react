@@ -1,0 +1,63 @@
+.popup__image-container {
+  position: relative;
+  margin: auto;
+  padding: 0;
+  display: -ms-grid;
+  display: grid;
+    grid-template-areas: 
+  ". button"
+  "image ."
+  "title .";
+  -ms-grid-rows: 41px max-content max-content;
+  grid-template-rows: 41px -webkit-max-content -webkit-max-content;
+  grid-template-rows: 41px max-content max-content;
+  -ms-grid-columns: auto 41px;
+  grid-template-columns: auto 41px;
+  -webkit-box-pack: center;
+    -ms-flex-pack: center;
+      justify-content: center;
+  z-index: 2;
+  -webkit-box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 557px) {
+  .popup__image-container {
+    -ms-grid-rows: 30px minmax(-webkit-min-content, 1fr) -webkit-max-content;
+    -ms-grid-rows: 30px minmax(min-content, 1fr) max-content;
+    grid-template-rows: 30px minmax(-webkit-min-content, 1fr) -webkit-max-content;
+    grid-template-rows: 30px minmax(min-content, 1fr) max-content;
+    -ms-grid-columns: minmax(-webkit-min-content, 1fr) 30px;
+    -ms-grid-columns: minmax(min-content, 1fr) 30px;
+    grid-template-columns: minmax(-webkit-min-content, 1fr) 30px;
+    grid-template-columns: minmax(min-content, 1fr) 30px;
+  }
+
+  /*возможно, что для просмотра проекта в браузерах от
+  Microsoft, будет нужно раскоммитить код ниже*/
+  /*
+  .popup__image-container > *:nth-child(1) {
+    -ms-grid-row: 1;
+    -ms-grid-column: 1;
+  }
+  .popup__image-container > *:nth-child(2) {
+    -ms-grid-row: 1;
+    -ms-grid-column: 2;
+  }
+  .popup__image-container > *:nth-child(3) {
+    -ms-grid-row: 2;
+    -ms-grid-column: 1;
+  }
+  .popup__image-container > *:nth-child(4) {
+    -ms-grid-row: 2;
+    -ms-grid-column: 2;
+  }
+  .popup__image-container > *:nth-child(5) {
+    -ms-grid-row: 3;
+    -ms-grid-column: 1;
+  }
+  .popup__image-container > *:nth-child(6) {
+    -ms-grid-row: 3;
+    -ms-grid-column: 2;
+  }*/
+}

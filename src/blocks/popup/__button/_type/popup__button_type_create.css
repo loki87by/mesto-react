@@ -1,0 +1,9 @@
+.popup__button_type_create {
+  line-height: 22px;
+}
+
+@media (max-width: 557px) {
+  .popup__button_type_create {
+    line-height: 17px;
+  }
+}

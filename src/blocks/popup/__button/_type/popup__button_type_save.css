@@ -1,0 +1,9 @@
+.popup__button_type_save {
+  line-height: 1.22;
+}
+
+@media (max-width: 557px) {
+  .popup__button_type_save {
+    line-height: 2.56;
+  }
+}

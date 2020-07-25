@@ -1,0 +1,22 @@
+.popup__text-error {
+  position: absolute;
+  left: 36px;
+  top: 143px;
+  margin: 3px 0 0 0;
+  max-height: 12px;
+  font-size: 12px;
+  line-height: 15px;
+  color: #ff0000;
+  -webkit-transition: .1s opacity, .1s visibility ease-in;
+  -o-transition: .1s opacity, .1s visibility ease-in;
+  transition: .1s opacity, .1s visibility ease-in;
+  z-index: 3;
+  word-wrap: break-word;
+}
+  
+@media (max-width: 557px) {
+  .popup__text-error {
+    top: 24vw;
+    left: calc((36 / 430) * 100%);
+  }
+}

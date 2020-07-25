@@ -1,0 +1,22 @@
+.profile__photo_change{
+  position: absolute;
+  top: calc((100% - 120px) / 2);
+  background-color: rgba(0, 0, 0, 0.8);
+  width: 120px;
+  height: 120px;
+  background-image: url('../../../../images/pen.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 26px;
+  opacity: 0;
+}
+
+.profile__photo_change:hover{
+  opacity: 1;
+}
+
+@media (max-width: 740px) {
+  .profile__photo_change{
+    top: 0px;
+  }
+}

@@ -1,0 +1,47 @@
+@import url('./__photo/profile__photo.css');
+@import url('./__photo/_change/profile__photo_change.css');
+@import url('./__info/profile__info.css');
+@import url('./__title/profile__title.css');
+@import url('./__subtitle/profile__subtitle.css');
+@import url('./__button/profile__button.css');
+@import url('./__button/_type/profile__button_type_edit.css');
+@import url('./__button/_type/profile__button_type_add.css');
+
+.profile {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+    -ms-flex-align: center;
+      align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  max-width: 100%;
+  max-height: -webkit-max-content;
+  max-height: -moz-max-content;
+  max-height: max-content;
+  margin: auto;
+  margin-bottom: 51px;
+}
+
+@media (max-width: 904px) {
+  .profile {
+    max-width: 90%;
+  }
+}
+
+@media (max-width: 740px) {
+  .profile {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+        flex-direction: column;
+    -webkit-box-align: center;
+      -ms-flex-align: center;
+        align-items: center;
+    margin-top: 2px;
+    margin-bottom: 36px;
+  }
+}

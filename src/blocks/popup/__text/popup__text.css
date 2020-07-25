@@ -1,0 +1,22 @@
+.popup__text {
+  min-width: 358px;
+  min-height: 27px;
+  margin-left: 36px;
+  padding: 0;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 1.21;
+  color: #000;
+}
+
+@media (max-width: 557px) {
+  .popup__text {
+    min-width: calc((358 / 430) * 100%);
+    min-height: calc((27.26 / 430) * 100%);
+    margin-left: calc((36 / 430) * 100%);
+    font-size: 2.5vw;
+  }
+}

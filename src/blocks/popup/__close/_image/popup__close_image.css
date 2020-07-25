@@ -1,0 +1,20 @@
+.popup__close_image {
+  grid-area: button;
+  -ms-grid-row-align: center;
+    align-self: center;
+  -ms-grid-column-align: center;
+    justify-self: center;
+  right: 0px;
+  top: 0px;
+}
+
+.popup__image-close:hover {
+  opacity: 0.6;
+}
+
+@media (max-width: 557px) {
+  .popup__close_image {
+    width: 30px;
+    height: 30px;
+  }
+}

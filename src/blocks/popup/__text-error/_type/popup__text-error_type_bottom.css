@@ -1,0 +1,10 @@
+.popup__text-error_type_bottom {
+  top: 200px;
+  }
+
+  
+@media (max-width: 557px) {
+  .popup__text-error_type_bottom {
+    top: 32vw;
+  }
+}

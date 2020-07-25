@@ -1,0 +1,26 @@
+.profile__button_type_add {
+  -ms-grid-column-align: end;
+    justify-self: end;
+  width: 150px;
+  height: 50px;
+  border: 2px solid #ffffff;
+  background-image: url(../../../../images/plus.svg);
+}
+
+@media (max-width: 600px) {
+  .profile__button_type_add {
+    width: calc(150px - (25% - 150px));
+  }
+}
+
+@media (max-width: 550px) {
+  .profile__button_type_add {
+    width: calc(150px - (15% - 150px));
+  }
+}
+
+@media (max-width: 500px) {
+  .profile__button_type_add {
+    width: 282px;
+  }
+}

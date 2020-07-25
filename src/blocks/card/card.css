@@ -1,0 +1,24 @@
+@import url('./__image/card__image.css');
+@import url('./__delete/card__delete.css');
+@import url('./__bottom/card__bottom.css');
+@import url('./__title/card__title.css');
+@import url('./__like/card__like.css');
+@import url('./__like/_type/card__like_type_active.css');
+@import url('./__counter/card__counter.css');
+
+.card {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+      flex-direction: column;
+  max-width: 282px;
+  height: 362px;
+}
+
+.card:hover{
+  opacity: .8;
+}

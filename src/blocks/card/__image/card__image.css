@@ -1,0 +1,13 @@
+.card__image {
+  width: 282px;
+  height: 282px;
+  object-fit: cover;
+  margin-bottom: 0;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  cursor: pointer;
+}
+
+.card__image :hover {
+  opacity: 0.6;
+}

@@ -1,0 +1,37 @@
+@import url('./__container/popup__container.css');
+@import url('./__image-container/popup__image-container.css');
+@import url('./__close/popup__close.css');
+@import url('./__close/_image/popup__close_image.css');
+@import url('./__title/popup__title.css');
+@import url('./__text/popup__text.css');
+@import url('./__text/_error/popup__text_error.css');
+@import url('./__text/_type/popup__text_type_name.css');
+@import url('./__text/_type/popup__text_type_activity.css');
+@import url('./__text/_type/popup__text_type_avatar.css');
+@import url('./__text-error/popup__text-error.css');
+@import url('./__text-error/_type/popup__text-error_type_bottom.css');
+@import url('./__button/popup__button.css');
+@import url('./__button/_type/popup__button_type_save.css');
+@import url('./__button/_type/popup__button_type_create.css');
+@import url('./__button/_type/popup__button_type_confirm.css');
+@import url('./__button/_error/popup__button_error.css');
+@import url('./__image/popup__image.css');
+@import url('./__image-title/popup__image-title.css');
+
+.popup {
+  position: fixed;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+  margin: 0;
+  padding: 0;
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: opacity .2s, visibility 0s linear .3s;
+  -o-transition: opacity .2s, visibility 0s linear .3s;
+  transition: opacity .2s, visibility 0s linear .3s;
+}
