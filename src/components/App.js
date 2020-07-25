@@ -43,6 +43,7 @@ function App() {
       <PopupWithForm name="editAvatar" title="Обновить аватар" children={<EditAvatar />} isOpen={isEditAvatarOpen} onClose={closeAllPopups} submitText="Сохранить" />
       <PopupWithForm name="editProfile" title="Редактировать профиль" children={<EditProfile />} isOpen={isEditProfileOpen} onClose={closeAllPopups} submitText="Сохранить" />
       <PopupWithForm name="addPlace" title="Новое место" children={<AddCards />} isOpen={isAddCardsOpen} onClose={closeAllPopups} submitText="Создать" />
+      <PopupWithForm name="popupConfirm" title="Вы уверены?" submitText="Да" />
       <ImagePopup isOpen={selectedCard} onClose={closeAllPopups} card={dataImage}/>
       <div className="page">
         <Header />
