@@ -7,6 +7,9 @@ import EditAvatar from './EditAvatar';
 import EditProfile from './EditProfile';
 import AddCards from './AddCards';
 import ImagePopup from './ImagePopup';
+import api from '../utils/Api';
+import Card from './Card';
+import {CurrentUserContext} from '../contexts/CurrentUserContext';
 import '../index.css';
 
 function App() {
@@ -15,10 +18,13 @@ function App() {
   const [isAddCardsOpen, setAddCardsOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState(false);
   const [dataImage, setDataImage] = React.useState({});
+  const [currentUser, setCurrentUser] = React.useState({});
+  const [cards, setCards] = React.useState([]);
   const setImage = (card) => {
     setDataImage(card);
     handleCardClick();
   }
+
   function handleEditAvatarClick() {
     setEditAvatarOpen(true);
   };
@@ -38,23 +44,42 @@ function App() {
     setSelectedCard(false)
     setDataImage({})
   }
+  React.useEffect(() => {
+    Promise.all([api.getUserInfo(), api.getInitialCards()])
+    .then(([user, cards]) => {
+      setCurrentUser(user);
+      setCards(cards);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }, []);
   return (
-    <div className="root">
-      <PopupWithForm name="editAvatar" title="Обновить аватар" children={<EditAvatar />} isOpen={isEditAvatarOpen} onClose={closeAllPopups} submitText="Сохранить" />
-      <PopupWithForm name="editProfile" title="Редактировать профиль" children={<EditProfile />} isOpen={isEditProfileOpen} onClose={closeAllPopups} submitText="Сохранить" />
-      <PopupWithForm name="addPlace" title="Новое место" children={<AddCards />} isOpen={isAddCardsOpen} onClose={closeAllPopups} submitText="Создать" />
-      <PopupWithForm name="popupConfirm" title="Вы уверены?" submitText="Да" />
-      <ImagePopup isOpen={selectedCard} onClose={closeAllPopups} card={dataImage}/>
-      <div className="page">
-        <Header />
-        <Main onEditAvatar={handleEditAvatarClick}
-        onEditProfile={handleEditProfileClick}
-        onAddCards={handleAddPlaceClick}
-        clickImages={setImage}
-        />
-        <Footer />
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="root">
+        <PopupWithForm name="editAvatar" title="Обновить аватар" children={<EditAvatar />} isOpen={isEditAvatarOpen} onClose={closeAllPopups} submitText="Сохранить" />
+        <PopupWithForm name="editProfile" title="Редактировать профиль" children={<EditProfile />} isOpen={isEditProfileOpen} onClose={closeAllPopups} submitText="Сохранить" />
+        <PopupWithForm name="addPlace" title="Новое место" children={<AddCards />} isOpen={isAddCardsOpen} onClose={closeAllPopups} submitText="Создать" />
+        <PopupWithForm name="popupConfirm" title="Вы уверены?" submitText="Да" />
+        <ImagePopup isOpen={selectedCard} onClose={closeAllPopups} card={dataImage}/>
+        <div className="page">
+          <Header />
+          <main className="content">
+            <Main onEditAvatar={handleEditAvatarClick}
+            onEditProfile={handleEditProfileClick}
+            onAddCards={handleAddPlaceClick}
+            clickImages={setImage}
+            />
+            <div className="cards">
+              {cards && cards.map((card) => (
+                <Card key={card._id} card={card} onCardClick={handleCardClick}/>
+              ))}
+            </div>
+          </main>
+          <Footer />
+        </div>
       </div>
-    </div>
+    </CurrentUserContext.Provider>
   );
 }
 
