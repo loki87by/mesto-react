@@ -44,6 +44,33 @@ function App() {
     setSelectedCard(false)
     setDataImage({})
   }
+  function handleCardLike(card) {
+    // Снова проверяем, есть ли уже лайк на этой карточке
+    const isLiked = card.likes.some(i => i._id === currentUser._id);
+
+    // Отправляем запрос в API и получаем обновлённые данные карточки
+    api.like(card._id, !isLiked).then((newCard) => {
+        // Формируем новый массив на основе имеющегося, подставляя в него новую карточку
+        const newCards = cards.map((i) => i._id === card._id ? newCard : i);
+        // Обновляем стейт
+        setCards(newCards);
+    });
+    api.dislike(card._id, isLiked).then((newCard) => {
+        // Формируем новый массив на основе имеющегося, подставляя в него новую карточку
+        const newCards = cards.map((i) => i._id === card._id ? newCard : i);
+        // Обновляем стейт
+        setCards(newCards);
+    });
+}
+  function handleCardDelete(card) {
+    // Отправляем запрос в API и получаем обновлённые данные карточки
+    api.deleteCard(card._id).then(() => {
+      // Формируем новый массив на основе имеющегося, без удаленной карточки
+      const newCards = cards.filter((i) => i._id !== card._id);
+      // Обновляем стейт
+      setCards(newCards);
+    });
+  }
   React.useEffect(() => {
     Promise.all([api.getUserInfo(), api.getInitialCards()])
     .then(([user, cards]) => {
@@ -72,7 +99,7 @@ function App() {
             />
             <div className="cards">
               {cards && cards.map((card) => (
-                <Card key={card._id} card={card} onCardClick={handleCardClick}/>
+                <Card key={card._id} card={card} onCardClick={handleCardClick} onCardLike={handleCardLike} onCardDelete={handleCardDelete}/>
               ))}
             </div>
           </main>
