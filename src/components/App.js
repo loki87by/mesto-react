@@ -3,7 +3,7 @@ import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
-import EditAvatar from './EditAvatar';
+import EditAvatarPopup from './EditAvatarPopup';
 import EditProfilePopup from './EditProfilePopup';
 import AddCards from './AddCards';
 import ImagePopup from './ImagePopup';
@@ -13,7 +13,7 @@ import {CurrentUserContext} from '../contexts/CurrentUserContext';
 import '../index.css';
 
 function App() {
-  const [isEditAvatarOpen, setEditAvatarOpen] = React.useState(false);
+  const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false);
   const [isAddCardsOpen, setAddCardsOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState(false);
@@ -26,7 +26,7 @@ function App() {
   }
 
   function handleEditAvatarClick() {
-    setEditAvatarOpen(true);
+    setEditAvatarPopupOpen(true);
   };
   function handleEditProfileClick() {
     setEditProfilePopupOpen(true)
@@ -38,7 +38,7 @@ function App() {
     setSelectedCard(true);
   };
   function closeAllPopups() {
-    setEditAvatarOpen(false)
+    setEditAvatarPopupOpen(false)
     setEditProfilePopupOpen(false)
     setAddCardsOpen(false)
     setSelectedCard(false)
@@ -81,11 +81,21 @@ function App() {
       console.log(`Ошибка: ${err}`)
     })
   }
+  function handleUpdateAvatar() {
+    api.setUserAvatar(currentUser.avatar)
+    .then((res) => {
+      setCurrentUser(res);
+      closeAllPopups()
+    })
+    .catch((err) => {
+      console.log(`Ошибка: ${err}`)
+    })
+  }
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="root">
         <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser}/>
-        <PopupWithForm name="editAvatar" title="Обновить аватар" children={<EditAvatar />} isOpen={isEditAvatarOpen} onClose={closeAllPopups} submitText="Сохранить" />
+        <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
         <PopupWithForm name="addPlace" title="Новое место" children={<AddCards />} isOpen={isAddCardsOpen} onClose={closeAllPopups} submitText="Создать" />
         <PopupWithForm name="popupConfirm" title="Вы уверены?" submitText="Да" />
         <ImagePopup isOpen={selectedCard} onClose={closeAllPopups} card={dataImage}/>
