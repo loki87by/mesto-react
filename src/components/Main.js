@@ -12,7 +12,7 @@ function Main(props) {
         <button className="profile__button profile__button_type_edit" type="button" onClick={props.onEditProfile}></button>
         <p className="profile__subtitle">{currentUser.about}</p>
       </div>
-      <button className="profile__button profile__button_type_add" type="button" onClick={props.onAddCards}></button>
+      <button className="profile__button profile__button_type_add" type="button" onClick={props.onAddPlacePopup}></button>
     </div>
   );
 }
