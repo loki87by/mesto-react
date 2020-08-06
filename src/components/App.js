@@ -37,6 +37,15 @@ function App() {
     setSelectedCard(true);
     setDataImage(props)
   };
+  
+  const [isCreateLoading, setCreateLoading] = React.useState("Создать");
+  function createLoader() {
+    setCreateLoading("Создание")
+  }
+  const [isSaveLoading, setSaveLoading] = React.useState("Сохранить");
+  function saveLoader() {
+    setSaveLoading("Сохранение")
+  }
   //*функции закрытия попапов
   function closeAllPopups() {
     setEditAvatarPopupOpen(false)
@@ -44,6 +53,8 @@ function App() {
     setAddPlacePopupOpen(false)
     setSelectedCard(false)
     setDataImage({})
+    setCreateLoading("Создать")
+    setSaveLoading("Сохранить")
   }
   function handleEscClose(e) {
     if (e.key === "Escape") {
@@ -124,9 +135,9 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="root">
-        <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
-        <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
-        <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onUpdatePlace={handleUpdatePlace} />
+        <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} onLoad={saveLoader} isLoading={isSaveLoading} />
+        <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} onLoad={saveLoader} isLoading={isSaveLoading} />
+        <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onUpdatePlace={handleUpdatePlace} onLoad={createLoader} isLoading={isCreateLoading} />
         <PopupWithForm name="popupConfirm" title="Вы уверены?" submitText="Да" />
         <ImagePopup isOpen={selectedCard} onClose={closeAllPopups} card={dataImage}/>
         <div className="page">

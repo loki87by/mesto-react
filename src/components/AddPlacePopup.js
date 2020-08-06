@@ -13,17 +13,19 @@ function AddPlacePopup(props) {
 
   function handleAddPlaceSubmit(e) {
     e.preventDefault()
+    props.onLoad()
     props.onUpdatePlace({
       name: placeTitle.current.value,
       link: link
-    })
+    });
   }
 
   function handleLinkChange(e) {
     setLink(e.target.value);
   }
+
   return (
-    <PopupWithForm name="addPlace" title="Новое место" isOpen={props.isOpen} onClose={props.onClose} onSubmit={handleAddPlaceSubmit} submitText="Создать" children={
+    <PopupWithForm name="addPlace" title="Новое место" isOpen={props.isOpen} onClose={props.onClose} onLoad={props.onLoad} onSubmit={handleAddPlaceSubmit} submitText={props.isLoading} children={
       <>
         <input type="text" ref={placeTitle} defaultValue={''} placeholder="Название" required className="popup__text popup__text_type_name" id="place-input" name="name" minLength="1" maxLength="30"/>
         <input type="url" value={link || ''} onChange={handleLinkChange} placeholder="Ссылка на картинку" required className="popup__text popup__text_type_activity" id="link-input" name="link" />
