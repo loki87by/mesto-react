@@ -6,8 +6,7 @@ function EditProfilePopup(props) {
   const currentUser = React.useContext(CurrentUserContext);
   const [name, setName] = React.useState('');
   const [description, setDescription] = React.useState('');
-  //const [value, setValue] = React.useState({name: "Имя", description: "О себе"});
-
+  
   React.useEffect(() => {
     setName(currentUser.name);
     setDescription(currentUser.about);
@@ -34,7 +33,7 @@ function EditProfilePopup(props) {
       <input type="text" value={name || ''} onChange={handleNameChange} required className="popup__text popup__text_type_name" id="name-input" name="name" pattern="[A-Za-zА-Яа-яЁё -]*" minLength="2" maxLength="40"/>
       <input type="text" value={description || ''} onChange={handleDescriptionChange} required className="popup__text popup__text_type_activity" id="activity-input" name="link" minLength="2" maxLength="200"/>
       </>}
-      />
+    />
   );
 }
 

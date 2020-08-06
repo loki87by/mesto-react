@@ -13,18 +13,17 @@ import {CurrentUserContext} from '../contexts/CurrentUserContext';
 import '../index.css';
 
 function App() {
+  //**стейты
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState(false);
-  const [dataImage, setDataImage] = React.useState({});
+  const [dataImage, setDataImage] = React.useState({link: '', name: ''});
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
-  const setImage = (card) => {
-    setDataImage(card);
-    handleCardClick();
-  }
 
+  //**функции
+  //*функции попапов
   function handleEditAvatarClick() {
     setEditAvatarPopupOpen(true);
   };
@@ -34,8 +33,9 @@ function App() {
   function handleAddPlaceClick() {
     setAddPlacePopupOpen(true);
   };
-  function handleCardClick() {
+  function handleCardClick(props) {
     setSelectedCard(true);
+    setDataImage(props)
   };
   function closeAllPopups() {
     setEditAvatarPopupOpen(false)
@@ -44,6 +44,7 @@ function App() {
     setSelectedCard(false)
     setDataImage({})
   }
+  //*функции карточек
   function handleCardLike(card) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
     api.like(card._id, !isLiked).then((newCard) => {
@@ -61,6 +62,18 @@ function App() {
       setCards(newCards);
     });
   }
+  function handleUpdatePlace(data) {
+    api.addNewCard(data.name, data.link)
+    .then((res) => {
+      setDataImage(res);
+      setCards([res, ...cards]);
+      closeAllPopups()
+    })
+    .catch((err) => {
+      console.log(`Ошибка: ${err}`)
+    })
+  }
+  //*дефолтные карточки и пользовательские данные
   React.useEffect(() => {
     Promise.all([api.getUserInfo(), api.getInitialCards()])
     .then(([user, cards]) => {
@@ -71,6 +84,7 @@ function App() {
       console.log(err);
     });
   }, []);
+  //*функции изменения пользовательских данных
   function handleUpdateUser(data) {
     api.updateInfo(data.name, data.about)
     .then((res) => {
@@ -91,23 +105,13 @@ function App() {
       console.log(`Ошибка: ${err}`)
     })
   }
-  function handleUpdatePlace(data) {
-    api.addNewCard(data.name, data.link)
-    .then((res) => {
-      setDataImage(res);
-      setCards(...cards, res);
-      closeAllPopups()
-    })
-    .catch((err) => {
-      console.log(`Ошибка: ${err}`)
-    })
-  }
+  //*DOM
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="root">
-        <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser}/>
-        <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
-        <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onUpdatePlace={handleUpdatePlace} />
+        <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} onLoad={isLoading} />
+        <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} onLoad={isLoading} />
+        <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onUpdatePlace={handleUpdatePlace} onLoad={isLoading} />
         <PopupWithForm name="popupConfirm" title="Вы уверены?" submitText="Да" />
         <ImagePopup isOpen={selectedCard} onClose={closeAllPopups} card={dataImage}/>
         <div className="page">
@@ -116,7 +120,6 @@ function App() {
             <Main onEditAvatar={handleEditAvatarClick}
             onEditProfile={handleEditProfileClick}
             onAddPlacePopup={handleAddPlaceClick}
-            clickImages={setImage}
             />
             <div className="cards">
               {cards && cards.map((card) => (

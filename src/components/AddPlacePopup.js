@@ -6,7 +6,7 @@ function AddPlacePopup(props) {
   const currentUser = React.useContext(CurrentUserContext);
   const placeTitle = React.useRef();
   const [link, setLink] = React.useState('');
-  
+
   React.useEffect(() => {
     setLink(currentUser.link);
   }, [currentUser]);

@@ -9,6 +9,7 @@
   background-repeat: no-repeat;
   background-size: 26px;
   opacity: 0;
+  cursor: pointer;
 }
 
 .profile__photo_change:hover{
