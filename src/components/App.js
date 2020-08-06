@@ -50,8 +50,14 @@ function App() {
       closeAllPopups();
     }
   }
+  function handleClickClose(e) {
+    if (e.target.classList.contains('popup_opened')) {
+      closeAllPopups();
+    }
+  }
   React.useEffect(() => {
     window.addEventListener('keydown', handleEscClose)
+    window.addEventListener('click', handleClickClose)
   })
   //*функции карточек
   function handleCardLike(card) {
