@@ -23,7 +23,7 @@ function App() {
   const [cards, setCards] = React.useState([]);
 
   //**функции
-  //*функции попапов
+  //*функции открытия попапов
   function handleEditAvatarClick() {
     setEditAvatarPopupOpen(true);
   };
@@ -37,6 +37,7 @@ function App() {
     setSelectedCard(true);
     setDataImage(props)
   };
+  //*функции закрытия попапов
   function closeAllPopups() {
     setEditAvatarPopupOpen(false)
     setEditProfilePopupOpen(false)
@@ -44,6 +45,14 @@ function App() {
     setSelectedCard(false)
     setDataImage({})
   }
+  function handleEscClose(e) {
+    if (e.key === "Escape") {
+      closeAllPopups();
+    }
+  }
+  React.useEffect(() => {
+    window.addEventListener('keydown', handleEscClose)
+  })
   //*функции карточек
   function handleCardLike(card) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
