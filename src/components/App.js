@@ -2,11 +2,12 @@
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
-import PopupWithForm from './PopupWithForm';
+//import PopupWithForm from './PopupWithForm';
 import EditAvatarPopup from './EditAvatarPopup';
 import EditProfilePopup from './EditProfilePopup';
 import AddPlacePopup from './AddPlacePopup';
 import ImagePopup from './ImagePopup';
+import ConfirmPopup from './ConfirmPopup';
 import api from '../utils/Api';
 import Card from './Card';
 import {CurrentUserContext} from '../contexts/CurrentUserContext';
@@ -17,10 +18,14 @@ function App() {
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
+  const [isConfirmPopupOpen, setConfirmPopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState(false);
   const [dataImage, setDataImage] = React.useState({link: '', name: ''});
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
+  const [isSaveLoading, setSaveLoading] = React.useState("Сохранить");
+  const [isCreateLoading, setCreateLoading] = React.useState("Создать");
+  const [cardDelete, selectCardDelete] = React.useState({});
 
   //**функции
   //*функции открытия попапов
@@ -37,12 +42,10 @@ function App() {
     setSelectedCard(true);
     setDataImage(props)
   };
-  
-  const [isCreateLoading, setCreateLoading] = React.useState("Создать");
+  //*функции смены текста сабмита
   function createLoader() {
     setCreateLoading("Создание")
   }
-  const [isSaveLoading, setSaveLoading] = React.useState("Сохранить");
   function saveLoader() {
     setSaveLoading("Сохранение")
   }
@@ -53,6 +56,7 @@ function App() {
     setAddPlacePopupOpen(false)
     setSelectedCard(false)
     setDataImage({})
+    setConfirmPopupOpen(false)
     setCreateLoading("Создать")
     setSaveLoading("Сохранить")
   }
@@ -82,10 +86,17 @@ function App() {
       setCards(newCards);
     });
   }
+
   function handleCardDelete(card) {
-    api.deleteCard(card._id).then(() => {
-      const newCards = cards.filter((i) => i._id !== card._id);
+    setConfirmPopupOpen(true)
+    selectCardDelete(card)
+  }
+
+  function ConfirmDelete() {
+    api.deleteCard(cardDelete._id).then(() => {
+      const newCards = cards.filter((i) => i._id !== cardDelete._id);
       setCards(newCards);
+      closeAllPopups();
     });
   }
   function handleUpdatePlace(data) {
@@ -138,7 +149,7 @@ function App() {
         <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} onLoad={saveLoader} isLoading={isSaveLoading} />
         <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} onLoad={saveLoader} isLoading={isSaveLoading} />
         <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onUpdatePlace={handleUpdatePlace} onLoad={createLoader} isLoading={isCreateLoading} />
-        <PopupWithForm name="popupConfirm" title="Вы уверены?" submitText="Да" />
+        <ConfirmPopup isOpen={isConfirmPopupOpen} onClose={closeAllPopups} onSubmit={ConfirmDelete} name="popupConfirm" title="Вы уверены?" submitText="Да" />
         <ImagePopup isOpen={selectedCard} onClose={closeAllPopups} card={dataImage}/>
         <div className="page">
           <Header />
