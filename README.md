@@ -5,4 +5,4 @@
 * ## [Деплой:](https://loki87by.github.io/mesto-react/) 
 
 Проект был учебным, дальнейших доработок больше не планируется, однако есть  
-### [модификация данного проекта: ](https://github.com/loki87by/react-mesto-auth) 
+### [модификация данного проекта с аутентификацией ](https://github.com/loki87by/react-mesto-auth) 
